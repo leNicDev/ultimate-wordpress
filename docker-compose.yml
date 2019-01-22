@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:8
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    container_name: mysql
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+      - MYSQL_DATABASE=wordpress
+
+  redis:
+    image: redis:5-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+
+  wordpress:
+    build: ./wordpress
+    container_name: wordpress
+    #volumes:
+    #  - ./config/wp-config.php:/www/wordpress/wp-config.php
+    restart: always
+    environment:
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_CACHE=true
+      - WORDPRESS_REDIS_HOST=redis
+      - WORDPRESS_REDIS_PORT=6379
+      - WORDPRESS_CACHE_KEY_SALT=wp
+    ports:
+      - 80:80
+    depends_on:
+      - mysql
+    links:
+      - mysql
+      - redis
+
+volumes:
+  db_data: {}
