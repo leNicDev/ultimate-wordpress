@@ -55,7 +55,8 @@ WORKDIR /www
 # Download Wordpress
 RUN curl -o /www/wordpress.tar.gz https://wordpress.org/wordpress-5.0.3.tar.gz && \
     tar -xzf wordpress.tar.gz && \
-    rm wordpress.tar.gz
+    rm wordpress.tar.gz && \
+    echo 'loaderio-90ea1101655b25f8af883ed3497c3f9c' > /var/www/wordpress/loaderio-90ea1101655b25f8af883ed3497c3f9c.txt
 
 # Copy Wordpress configuration
 COPY config/wp-config.php /www/wordpress/wp-config.php
