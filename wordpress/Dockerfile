@@ -36,7 +36,7 @@ RUN apk add --update --no-cache nginx \
 
 # Copy nginx configuration
 COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY snippets /etc/nginx/snippetsdocke
+COPY snippets /etc/nginx/snippets
 
 # Copy PHP-FPM configuration
 COPY config/fpm-pool.conf /etc/php7/php-fpm.d/zzz_custom.conf
