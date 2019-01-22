@@ -31,12 +31,12 @@ RUN apk add --update --no-cache nginx \
     musl \
     tar \
     supervisor && \
-    mkdir -p /www && \
-    mkdir -p /run/php && \
+    mkdir -p /www/cache /run/php && \
     chown -R nobody:nobody /www
 
 # Copy nginx configuration
 COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY snippets /etc/nginx/snippetsdocke
 
 # Copy PHP-FPM configuration
 COPY config/fpm-pool.conf /etc/php7/php-fpm.d/zzz_custom.conf
