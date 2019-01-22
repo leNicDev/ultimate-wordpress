@@ -31,7 +31,12 @@ RUN apk add --update --no-cache nginx \
     musl \
     tar \
     supervisor && \
-    mkdir -p /www/cache /run/php && \
+    mkdir -p /www && \
+    mkdir -p /www/cache && \
+    mkdir -p /www/acme && \
+    mkdir -p /run/php && \
+    mkdir -p /var/tmp/nginx && \
+    chown -R nobody:nobody /var/tmp/nginx && \
     chown -R nobody:nobody /www
 
 # Copy nginx configuration
