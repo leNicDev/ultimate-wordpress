@@ -10,3 +10,7 @@ This stack consists of the following components:
 - PHP-FPM 7.2
 - MySQL 8
 - Redis 5
+
+TODO:
+- Let's Encrypt
+- Persist wp-content
